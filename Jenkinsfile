@@ -36,33 +36,12 @@ pipeline {
                 }
             }
         }
-        stage('Build and Publish FE') {
-            when {
-                expression {
-                    return env.Component.contains('All') || env.Component.contains('Frontend') ;
-                }
-            }
-            steps {
-                script {
-                        sh '''
-                        image_name="frvalente/teste:$branchName"
-                        
-                        docker build -t $image_name -f Dockerfile .
-                        docker push $image_name
-                        '''
-                }
-            }
-        }
+
         stage('Build and Publish BE') {
-            when {
-                expression {
-                    return env.Component.contains('All') || env.Component.contains('Backend') ;
-                }
-            }
             steps {
                 script {
                         sh '''
-                        image_name="frvalente/teste:$branchName"
+                        image_name="melvinalves/teste:$branchName"
                         
                         docker build -t $image_name -f Dockerfile .
                         docker push $image_name
